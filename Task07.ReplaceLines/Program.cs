@@ -7,8 +7,8 @@ Func<int, Task> process = async x =>
 };
 
 int[] array = [1, 2, 3, 4, 5];
-var tasks = array.Select(a => process(a));
-await Task.WhenAll([.. tasks]);
+var tasks = array.Select(a => Task.Run(() => process(a)));
+await Task.WhenAll(tasks);
 //foreach (int i in array)
 //    await process(i);
 

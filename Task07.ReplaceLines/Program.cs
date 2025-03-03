@@ -2,6 +2,7 @@
 
 Func<int, Task> process = async x =>
 {
+    Thread.Sleep(1000);
     await Task.Delay(1000); //Stub for some async operation.
     Console.WriteLine($"End processing {x}");
 };

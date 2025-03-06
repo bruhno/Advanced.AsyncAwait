@@ -12,7 +12,6 @@ Task CreateTask1()
     return Task.CompletedTask;
 }
 
-
 async Task CreateTask2()
 {
     await Task.Delay(500);

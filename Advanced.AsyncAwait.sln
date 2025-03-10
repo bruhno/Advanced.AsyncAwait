@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task08.Parallel", "Task08.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task09.InCurrentThread", "Task09.InCurrentThread\Task09.InCurrentThread.csproj", "{3BD8D27E-3E94-4EAD-AFD0-D41E193A38B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task10.ConfigureAwait", "Task10.ConfigureAwait\Task10.ConfigureAwait.csproj", "{6A6512C3-CDDA-4314-A500-509375DA9A1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task11.BoolAwait", "Task11.BoolAwait\Task11.BoolAwait.csproj", "{4B574801-8232-4A39-9A81-3A43E2493202}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{3BD8D27E-3E94-4EAD-AFD0-D41E193A38B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BD8D27E-3E94-4EAD-AFD0-D41E193A38B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BD8D27E-3E94-4EAD-AFD0-D41E193A38B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A6512C3-CDDA-4314-A500-509375DA9A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A6512C3-CDDA-4314-A500-509375DA9A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A6512C3-CDDA-4314-A500-509375DA9A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A6512C3-CDDA-4314-A500-509375DA9A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B574801-8232-4A39-9A81-3A43E2493202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B574801-8232-4A39-9A81-3A43E2493202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B574801-8232-4A39-9A81-3A43E2493202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B574801-8232-4A39-9A81-3A43E2493202}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

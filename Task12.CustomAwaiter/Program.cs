@@ -13,7 +13,7 @@ _ = Task.Run(() =>
 
 await me;
 
-Console.WriteLine($"After await {Environment.CurrentManagedThreadId}");
+Console.WriteLine($"After await {Environment.CurrentManagedThreadId} : {Thread.CurrentThread.ExecutionContext}");
 
 class MyAwaiter:INotifyCompletion
 {
@@ -26,6 +26,11 @@ class MyAwaiter:INotifyCompletion
     public void OnCompleted(Action continuation)
     {
         _continuation = continuation;
+    }
+
+    public void UnsafeOnCompleted(Action continuation)
+    {
+        _continuation = continuation;        
     }
 
     public void SetCompleted()

@@ -1,4 +1,6 @@
-﻿delegate int MyFunc();
+﻿using System;
+
+delegate int MyFunc();
 
 class Program
 {
@@ -9,17 +11,7 @@ class Program
     }
 
 
-    public static event AsyncEventHandler<ValueEventArgsAsync> OnProcess
-    {
-        add
-        {
-            _handlers.Add(value);
-        }
-        remove
-        {
-            _handlers.Remove(value);
-        }
-    }
+    public static event AsyncEventHandler<ValueEventArgsAsync> OnProcess = default!;
 
     static async Task Main(string[] args)
     {
@@ -41,26 +33,29 @@ class Program
             Console.WriteLine("3");
         };
 
-        await InvokeOnProcess(null!, null!);
-        await InvokeOnProcess(null!, null!);
+
+        await Task.WhenAll(OnProcess.GetInvocationList()
+            .Select(d => ((AsyncEventHandler<ValueEventArgsAsync>)d)(null!, null!)));
+
+        await Task.WhenAll(OnProcess.GetInvocationList()
+            .Select(d => ((AsyncEventHandler<ValueEventArgsAsync>)d)(null!, null!)));
 
         Console.WriteLine("Finish");
-
     }
 
-    private static Task InvokeOnProcess(object sender, ValueEventArgsAsync args)
-    {
-        Task task = null!;
+    //private static Task InvokeOnProcess(object sender, ValueEventArgsAsync args)
+    //{
+    //    Task task = null!;
 
-        foreach (var handler in _handlers)
-        {
-            task = (task is null)
-                ? Task.Run(() => handler(sender, args))
-                : task.ContinueWith(_ => handler(sender, args)).Unwrap();
-        }
+    //    foreach (var h in OnProcess.GetInvocationList())
+    //    {
+    //        var handler = (AsyncEventHandler<ValueEventArgsAsync>)h;
 
-        return task;
-    }
+    //        task = (task is null)
+    //            ? Task.Run(() => handler(sender, args))
+    //            : task.ContinueWith(_ => handler(sender, args)).Unwrap();
+    //    }
 
-    private static List<AsyncEventHandler<ValueEventArgsAsync>> _handlers = [];
+    //    return task;
+    //}
 }

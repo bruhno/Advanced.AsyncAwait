@@ -44,15 +44,14 @@ public static class Helper
 
                 if (list.Count == tasks.Length)
                 {
-                    tcs.SetResult(list.ToArray());
+                    tcs.SetResult([.. list]);
                 }
             },
             TaskContinuationOptions.OnlyOnRanToCompletion);
 
             task.ContinueWith(t =>
             {
-                Console.WriteLine(t.Status);
-                tcs.SetResult(list.ToArray());
+                tcs.SetResult([.. list]);
             },
             TaskContinuationOptions.NotOnRanToCompletion);
         }

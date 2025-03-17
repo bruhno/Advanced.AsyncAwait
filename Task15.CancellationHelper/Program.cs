@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-var task = Task.Run(async () =>
+﻿var task = Task.Run(async () =>
 {
     await Task.Delay(3000);
     return 1234;
@@ -27,34 +25,10 @@ public static class Helper
     {
         var tcs = new TaskCompletionSource<TResult>();
 
-        var mre = new ManualResetEvent(false);
+        ct.Register(tcs.SetCanceled);
 
-        _ = Task.Run(() =>
-        {
-            WaitHandle.WaitAny([
-                ct.WaitHandle,
-                mre
-            ]);
+        task.ContinueWith(t => tcs.SetResult(t.Result));
 
-            if (!tcs.Task.IsCompleted)
-            {
-                tcs.SetCanceled();
-            }
-        });
-
-        task.ContinueWith(t =>
-        {
-            if (!tcs.Task.IsCompleted)
-            {
-                mre.Set();
-                tcs.SetResult(t.Result);
-            }
-        });
-
-        return tcs.Task.ContinueWith(t =>
-        {
-            mre.Dispose();
-            return t.Result;
-        });
+        return tcs.Task;
     }
 }

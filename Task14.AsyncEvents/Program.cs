@@ -63,5 +63,4 @@ class Program
     }
 
     private static List<AsyncEventHandler<ValueEventArgsAsync>> _handlers = [];
-    //private static AsyncEventHandler<ValueEventArgsAsync> _onProcess = default!;
 }

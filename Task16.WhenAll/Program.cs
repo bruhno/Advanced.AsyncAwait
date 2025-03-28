@@ -1,32 +1,17 @@
 ﻿
-var task1 = Task.Run(async () =>
-    {
-        await Task.Delay(1000);
-        return 1;
-    });
 
-var task2 = Task.Run(async () =>
+using System.Collections.Concurrent;
+
+var tasks = Enumerable.Range(0, 10).Select(x => Task.Run(async () =>
 {
-    await Task.Delay(2000);
-    return 2;
-});
+    await Task.Delay(1000);
+    return x;
+})).ToArray();
 
-var task3 = Task.Run(async () =>
-{
-    await Task.Delay(3000);
-    throw new OperationCanceledException();
-    return 3;
-});
 
-var task4 = Task.Run(async () =>
-{
-    await Task.Delay(4000);
-    return 4;
-});
+var arr = await Helper.WhenAllOrError(tasks);
 
-var arr = await Helper.WhenAllOrError(task1, task2, task3, task4);
-
-Console.WriteLine(string.Join(",", arr));
+Console.WriteLine(string.Join(",", arr.Order()));
 
 public static class Helper
 {
@@ -34,7 +19,7 @@ public static class Helper
     {
         var tcs = new TaskCompletionSource<TResult[]>();
 
-        var list = new List<TResult>();
+        var list = new ConcurrentBag<TResult>();
 
         foreach (var task in tasks)
         {
